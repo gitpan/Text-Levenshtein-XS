@@ -5,7 +5,7 @@ use warnings FATAL => 'all';
 require Exporter;
 
 @Text::Levenshtein::XS::ISA       = qw/Exporter/;
-$Text::Levenshtein::XS::VERSION   = qw/0.40/;
+$Text::Levenshtein::XS::VERSION   = qw/0.42/;
 @Text::Levenshtein::XS::EXPORT_OK = qw/distance/;
 
 eval {
@@ -20,7 +20,7 @@ eval {
 
 
 sub distance {
-    return Text::Levenshtein::XS::xs_distance( [unpack('U*', shift)], [unpack('U*', shift)] );
+    return Text::Levenshtein::XS::xs_distance( [unpack('U*', shift)], [unpack('U*', shift)], shift || 0);
 }
 
 
@@ -38,6 +38,11 @@ __END__
 =head1 NAME
 
 Text::Levenshtein::XS - XS Levenshtein edit distance.
+
+=for HTML 
+    <a href="https://travis-ci.org/ugexe/Text--Levenshtein--XS"><img src="https://travis-ci.org/ugexe/Text--Levenshtein--XS.svg?branch=master"></a>
+    <a href='https://coveralls.io/r/ugexe/Text--Levenshtein--XS?branch=master'><img src='https://coveralls.io/repos/ugexe/Text--Levenshtein--XS/badge.png?branch=master' alt='Coverage Status' /></a>
+=cut
 
 =head1 SYNOPSIS
 
@@ -60,16 +65,26 @@ Returns the number of edits (insert,delete,substitute) required to turn the sour
 
 =head2 distance
 
-Arguments: source string and target string.
+=over 4
 
+=item Arguments: $source_text, $target_text, (optional) $max_distance
 
-Returns: int that represents the edit distance between the two argument. Stops calculations and returns -1 if max distance is set and reached.
+=item Return Value: Int $edit_distance || undef (if max_distance is exceeded)
+
+=back
+
+Returns: int that represents the edit distance between the two argument. Stops calculations and returns undef if max distance is set and reached.
 
 Wrapper function to take the edit distance between a source and target string using XS algorithm implementation.
 
     use Text::Levenshtein::XS qw/distance/;
     print distance('Neil','Niel');
     # prints 2
+
+    my $distance = distance('Neil','Niel',1);
+    print (defined $distance) ? $distance : "Exceeded max distance";
+    # prints "Exceeded max distance"
+
 
 =head1 NOTES
 
