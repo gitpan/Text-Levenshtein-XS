@@ -7,24 +7,16 @@
 # the same terms as the Perl 5 programming language system itself.
 #
 package Text::Levenshtein::XS;
-$Text::Levenshtein::XS::VERSION = '0.421'; # TRIAL
+$Text::Levenshtein::XS::VERSION = '0.426';
 use 5.008;
 use strict;
 use warnings FATAL => 'all';
 require Exporter;
+require XSLoader;
+XSLoader::load('Text::Levenshtein::XS', $Text::Levenshtein::XS::VERSION);
 
 @Text::Levenshtein::XS::ISA       = qw/Exporter/;
 @Text::Levenshtein::XS::EXPORT_OK = qw/distance/;
-
-eval {
-    require XSLoader;
-    XSLoader::load(__PACKAGE__, $Text::Levenshtein::XS::VERSION);
-    1;
-} or do {
-    require DynaLoader;
-    DynaLoader::bootstrap(__PACKAGE__, $Text::Levenshtein::XS::VERSION);
-    sub dl_load_flags {0} # Prevent DynaLoader from complaining and croaking
-};
 
 
 
@@ -46,7 +38,7 @@ Text::Levenshtein::XS - Calculate edit distance based on insertion, deletion, su
 
 =head1 VERSION
 
-version 0.421
+version 0.426
 
 =head1 SYNOPSIS
 

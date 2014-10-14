@@ -7,11 +7,10 @@ build_requires:
   File::Temp: '0'
   IO::Handle: '0'
   IPC::Open3: '0'
-  Module::Build: '0.28'
   Test::More: '0.88'
   utf8: '0'
 configure_requires:
-  Module::Build: '0.28'
+  ExtUtils::MakeMaker: '0'
 dynamic_config: '0'
 generated_by: 'Dist::Zilla version 5.020, CPAN::Meta::Converter version 2.140640'
 license: perl
@@ -25,20 +24,19 @@ no_index:
 provides:
   Text::Levenshtein::XS:
     file: lib/Text/Levenshtein/XS.pm
-    version: '0.421'
+    version: '0.426'
 requires:
-  DynaLoader: '0'
   Exporter: '0'
   XSLoader: '0'
   perl: '5.008'
   strict: '0'
   warnings: '0'
 resources:
-  bugtracker: http://github.com/TEXT-LEVENSHTEIN-XS/Text-Levenshtein-XS/issues
+  bugtracker: https://github.com/ugexe/Text--Levenshtein--XS/issues
   homepage: https://github.com/ugexe/Text--Levenshtein--XS
   license: http://dev.perl.org/licenses/
   repository: https://github.com/ugexe/Text--Levenshtein--XS.git
-version: '0.421'
+version: '0.426'
 x_BuiltWith:
   failures:
     Dist::Zilla::Plugin::ReportPhase: 'Module::MetaData could not parse a version from /home/nickl/perl5/perlbrew/perls/perl-5.20.0/lib/site_perl/5.20.0/Dist/Zilla/Plugin/ReportPhase.pm'
@@ -46,15 +44,13 @@ x_BuiltWith:
     Dist::Zilla: '5.020'
     Dist::Zilla::Plugin::ArchiveRelease: '4.00'
     Dist::Zilla::Plugin::AutoPrereqs: '5.020'
-    Dist::Zilla::Plugin::Bugtracker: '1.111080'
     Dist::Zilla::Plugin::CPANFile: '5.020'
     Dist::Zilla::Plugin::CheckChangesHasContent: '0.006'
     Dist::Zilla::Plugin::CheckPrereqsIndexed: '0.012'
     Dist::Zilla::Plugin::Clean: '0.07'
     Dist::Zilla::Plugin::ConfirmRelease: '5.020'
+    Dist::Zilla::Plugin::ContributorsFromGit: '0.014'
     Dist::Zilla::Plugin::CopyFilesFromBuild: '0.103510'
-    Dist::Zilla::Plugin::DualBuilders: '1.001'
-    Dist::Zilla::Plugin::ExecDir: '5.020'
     Dist::Zilla::Plugin::GatherDir: '5.020'
     Dist::Zilla::Plugin::GenerateFile: '5.020'
     Dist::Zilla::Plugin::Git::Commit: '2.025'
@@ -77,7 +73,6 @@ x_BuiltWith:
     Dist::Zilla::Plugin::MetaYAML: '5.020'
     Dist::Zilla::Plugin::Metadata: '3.03'
     Dist::Zilla::Plugin::MinimumPerl: '1.003'
-    Dist::Zilla::Plugin::ModuleBuild: '5.020'
     Dist::Zilla::Plugin::MojibakeTests: '0.7'
     Dist::Zilla::Plugin::NextRelease: '5.020'
     Dist::Zilla::Plugin::PkgVersion: '5.020'
@@ -87,12 +82,12 @@ x_BuiltWith:
     Dist::Zilla::Plugin::Prepender: '1.112280'
     Dist::Zilla::Plugin::Prereqs::AuthorDeps: '0.003'
     Dist::Zilla::Plugin::PruneCruft: '5.020'
+    Dist::Zilla::Plugin::PruneFiles: '5.020'
     Dist::Zilla::Plugin::ReadmeAnyFromPod: '0.142470'
     Dist::Zilla::Plugin::ReadmeFromPod: '0.21'
     Dist::Zilla::Plugin::ReportVersions::Tiny: '1.10'
     Dist::Zilla::Plugin::Repository: '0.20'
     Dist::Zilla::Plugin::RunExtraTests: '0.022'
-    Dist::Zilla::Plugin::ShareDir: '5.020'
     Dist::Zilla::Plugin::Test::CPAN::Changes: '0.008'
     Dist::Zilla::Plugin::Test::CPAN::Meta::JSON: '0.003'
     Dist::Zilla::Plugin::Test::Compile: '2.048'
@@ -106,13 +101,12 @@ x_BuiltWith:
     Dist::Zilla::Plugin::Test::Version: '0.002004'
     Dist::Zilla::Plugin::TestRelease: '5.020'
     Dist::Zilla::Plugin::UploadToCPAN: '5.020'
-    DynaLoader: '1.25'
     Exporter: '5.70'
+    ExtUtils::MakeMaker: '6.98'
     File::Spec: '3.47'
     File::Temp: '0.2304'
     IO::Handle: '1.35'
     IPC::Open3: '1.16'
-    Module::Build: '0.4206'
     Pod::Coverage::TrustPod: '0.100003'
     Test::CPAN::Changes: '0.30'
     Test::CPAN::Meta: '0.23'
@@ -149,7 +143,7 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::Git::NextVersion
       config:
         Dist::Zilla::Plugin::Git::NextVersion:
-          first_version: '0.421'
+          first_version: '0.001'
           version_by_branch: '1'
           version_regexp: (?^:^v(.+)$)
         Dist::Zilla::Role::Git::Repo:
@@ -348,25 +342,17 @@ x_Dist_Zilla:
       name: PodWeaver
       version: '4.006'
     -
+      class: Dist::Zilla::Plugin::ContributorsFromGit
+      name: ContributorsFromGit
+      version: '0.014'
+    -
       class: Dist::Zilla::Plugin::NextRelease
       name: NextRelease
-      version: '5.020'
-    -
-      class: Dist::Zilla::Plugin::ExecDir
-      name: ExecDir
-      version: '5.020'
-    -
-      class: Dist::Zilla::Plugin::ShareDir
-      name: ShareDir
       version: '5.020'
     -
       class: Dist::Zilla::Plugin::MinimumPerl
       name: MinimumPerl
       version: '1.003'
-    -
-      class: Dist::Zilla::Plugin::Bugtracker
-      name: Bugtracker
-      version: '1.111080'
     -
       class: Dist::Zilla::Plugin::Metadata
       name: Metadata
@@ -423,17 +409,6 @@ x_Dist_Zilla:
       name: MakeMaker
       version: '5.020'
     -
-      class: Dist::Zilla::Plugin::ModuleBuild
-      config:
-        Dist::Zilla::Role::TestRunner:
-          default_jobs: '1'
-      name: ModuleBuild
-      version: '5.020'
-    -
-      class: Dist::Zilla::Plugin::DualBuilders
-      name: DualBuilders
-      version: '1.001'
-    -
       class: Dist::Zilla::Plugin::MetaYAML
       name: MetaYAML
       version: '5.020'
@@ -461,6 +436,10 @@ x_Dist_Zilla:
       class: Dist::Zilla::Plugin::CopyFilesFromBuild
       name: CopyFilesFromBuild
       version: '0.103510'
+    -
+      class: Dist::Zilla::Plugin::PruneFiles
+      name: PruneFiles
+      version: '5.020'
     -
       class: Dist::Zilla::Plugin::CheckChangesHasContent
       name: CheckChangesHasContent
@@ -523,10 +502,10 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::CommitBuild:
           branch: build/%b
           build_root: ~
-          message: 'Build of release v%v (%h on %b)'
+          message: 'Build of release v%v%t (%h on %b)'
           multiple_inheritance: '0'
-          release_branch: dev/%b
-          release_message: 'Build of release v%v (%h on %b)'
+          release_branch: release
+          release_message: 'Build of release v%v%t (%h on %b)'
         Dist::Zilla::Role::Git::Repo:
           repo_root: .
       name: Git::CommitBuild
@@ -537,7 +516,7 @@ x_Dist_Zilla:
         Dist::Zilla::Plugin::Git::Tag:
           branch: ~
           signed: '0'
-          tag: v0.421
+          tag: v0.426
           tag_format: v%v
           tag_message: 'Tagged release %v'
           time_zone: local
@@ -602,5 +581,8 @@ x_Dist_Zilla:
   zilla:
     class: Dist::Zilla::Dist::Builder
     config:
-      is_trial: '1'
+      is_trial: '0'
     version: '5.020'
+x_contributors:
+  - 'Nick <nlogan@gmail.com>'
+  - 'ugexe <nlogan@gmail.com>'

@@ -48,13 +48,12 @@ sub pmver {
     return sprintf('%-45s => %-10s%-15s%s', $module, $pmver, $wanted, "\n");
 }
 
-eval { $v .= pmver('DynaLoader','any version') };
 eval { $v .= pmver('Exporter','any version') };
+eval { $v .= pmver('ExtUtils::MakeMaker','any version') };
 eval { $v .= pmver('File::Spec','any version') };
 eval { $v .= pmver('File::Temp','any version') };
 eval { $v .= pmver('IO::Handle','any version') };
 eval { $v .= pmver('IPC::Open3','any version') };
-eval { $v .= pmver('Module::Build','0.28') };
 eval { $v .= pmver('Test::More','0.88') };
 eval { $v .= pmver('XSLoader','any version') };
 eval { $v .= pmver('strict','any version') };
