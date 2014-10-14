@@ -1,4 +1,4 @@
-#!perl -T
+#!perl
 #
 # This file is part of Text-Levenshtein-XS
 #
@@ -7,17 +7,13 @@
 # This is free software; you can redistribute it and/or modify it under
 # the same terms as the Perl 5 programming language system itself.
 #
-use 5.008;
+
 use strict;
-use warnings FATAL => 'all';
-use Test::More tests => 1;
+use warnings;
 
-BEGIN { use_ok 'Text::Levenshtein::XS' }
-
-
-
-1;
-
-
-
-__END__
+use Test::More 0.96 tests => 2;
+use_ok('Test::CPAN::Changes');
+subtest 'changes_ok' => sub {
+    changes_file_ok('Changes');
+};
+done_testing();

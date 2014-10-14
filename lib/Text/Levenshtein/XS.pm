@@ -1,11 +1,19 @@
+#
+# This file is part of Text-Levenshtein-XS
+#
+# This software is copyright (c) 2014 by Nick Logan.
+#
+# This is free software; you can redistribute it and/or modify it under
+# the same terms as the Perl 5 programming language system itself.
+#
 package Text::Levenshtein::XS;
+$Text::Levenshtein::XS::VERSION = '0.421'; # TRIAL
 use 5.008;
 use strict;
 use warnings FATAL => 'all';
 require Exporter;
 
 @Text::Levenshtein::XS::ISA       = qw/Exporter/;
-$Text::Levenshtein::XS::VERSION   = qw/0.42/;
 @Text::Levenshtein::XS::EXPORT_OK = qw/distance/;
 
 eval {
@@ -19,6 +27,7 @@ eval {
 };
 
 
+
 sub distance {
     return Text::Levenshtein::XS::xs_distance( [unpack('U*', shift)], [unpack('U*', shift)], shift || 0);
 }
@@ -27,22 +36,17 @@ sub distance {
 
 1;
 
+=pod
 
-
-__END__
-
-
-
-=encoding utf8
+=encoding UTF-8
 
 =head1 NAME
 
-Text::Levenshtein::XS - XS Levenshtein edit distance.
+Text::Levenshtein::XS - Calculate edit distance based on insertion, deletion, substitution, and transposition
 
-=for HTML 
-    <a href="https://travis-ci.org/ugexe/Text--Levenshtein--XS"><img src="https://travis-ci.org/ugexe/Text--Levenshtein--XS.svg?branch=master"></a>
-    <a href='https://coveralls.io/r/ugexe/Text--Levenshtein--XS?branch=master'><img src='https://coveralls.io/repos/ugexe/Text--Levenshtein--XS/badge.png?branch=master' alt='Coverage Status' /></a>
-=cut
+=head1 VERSION
+
+version 0.421
 
 =head1 SYNOPSIS
 
@@ -61,6 +65,8 @@ Returns the number of edits (insert,delete,substitute) required to turn the sour
     distance('ⓕⓞⓤⓡ','ⓕⓤⓞⓡ'), 
     # prints 2
 
+=for Pod::Coverage dl_load_flags xs_distance
+
 =head1 METHODS
 
 =head2 distance
@@ -73,18 +79,19 @@ Returns the number of edits (insert,delete,substitute) required to turn the sour
 
 =back
 
-Returns: int that represents the edit distance between the two argument. Stops calculations and returns undef if max distance is set and reached.
+Returns: int that represents the edit distance between the two argument, or undef if $max_distance threshold is exceeded.
 
-Wrapper function to take the edit distance between a source and target string using XS algorithm implementation.
+Takes the edit distance between a source and target string using XS 2 vector implementation.
 
     use Text::Levenshtein::XS qw/distance/;
     print distance('Neil','Niel');
     # prints 2
 
+Stops calculations and returns undef if $max_distance is set, non-zero (0 = no limit), and the algorithm has determined the final distance will be greater than $max_distance.
+
     my $distance = distance('Neil','Niel',1);
     print (defined $distance) ? $distance : "Exceeded max distance";
     # prints "Exceeded max distance"
-
 
 =head1 NOTES
 
@@ -102,7 +109,16 @@ Drop in replacement for L<Text::LevenshteinXS>
 
 =item * L<Text::Fuzzy>
 
+=item * L<Text::Levenshtein::Flexible>
+
 =back
+
+=head1 REPOSITORY
+
+L<https://github.com/ugexe/Text--Levenshtein--XS>
+
+=for HTML <a href="https://travis-ci.org/ugexe/Text--Levenshtein--XS"><img src="https://travis-ci.org/ugexe/Text--Levenshtein--XS.svg?branch=master"></a>
+    <a href='https://coveralls.io/r/ugexe/Text--Levenshtein--XS?branch=master'><img src='https://coveralls.io/repos/ugexe/Text--Levenshtein--XS/badge.png?branch=master' alt='Coverage Status' /></a>
 
 =head1 BUGS
 
@@ -112,10 +128,21 @@ L<https://github.com/ugexe/Text--Levenshtein--XS/issues>
 
 =head1 AUTHOR
 
-Nick Logan <F<ugexe@cpan.com>>
+ugexe <ugexe@cpan.org>
 
-=head1 LICENSE AND COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-This library is free software; you can redistribute it and/or modify it under the same terms as Perl itself.
+This software is copyright (c) 2014 by Nick Logan.
+
+This is free software; you can redistribute it and/or modify it under
+the same terms as the Perl 5 programming language system itself.
 
 =cut
+
+__END__
+
+
+
+# ABSTRACT: Calculate edit distance based on insertion, deletion, substitution, and transposition
+
+

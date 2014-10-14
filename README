@@ -1,5 +1,9 @@
 NAME
-    Text::Levenshtein::XS - XS Levenshtein edit distance.
+    Text::Levenshtein::XS - Calculate edit distance based on insertion,
+    deletion, substitution, and transposition
+
+VERSION
+    version 0.421
 
 SYNOPSIS
         use Text::Levenshtein::XS qw/distance/;
@@ -20,36 +24,55 @@ DESCRIPTION
 
 METHODS
   distance
-    Arguments: source string and target string.
+    Arguments: $source_text, $target_text, (optional) $max_distance
+    Return Value: Int $edit_distance || undef (if max_distance is exceeded)
 
-    Returns: int that represents the edit distance between the two argument.
-    Stops calculations and returns -1 if max distance is set and reached.
+    Returns: int that represents the edit distance between the two argument,
+    or undef if $max_distance threshold is exceeded.
 
-    Wrapper function to take the edit distance between a source and target
-    string using XS algorithm implementation.
+    Takes the edit distance between a source and target string using XS 2
+    vector implementation.
 
         use Text::Levenshtein::XS qw/distance/;
         print distance('Neil','Niel');
         # prints 2
 
+    Stops calculations and returns undef if $max_distance is set, non-zero
+    (0 = no limit), and the algorithm has determined the final distance will
+    be greater than $max_distance.
+
+        my $distance = distance('Neil','Niel',1);
+        print (defined $distance) ? $distance : "Exceeded max distance";
+        # prints "Exceeded max distance"
+
 NOTES
     Drop in replacement for Text::LevenshteinXS
 
 SEE ALSO
-    * Text::Levenshtein::Damerau
-    * Text::Levenshtein::Damerau::PP
-    * Text::Levenshtein::Damerau::XS
-    * Text::Fuzzy
+    *   Text::Levenshtein::Damerau
+
+    *   Text::Levenshtein::Damerau::PP
+
+    *   Text::Levenshtein::Damerau::XS
+
+    *   Text::Fuzzy
+
+    *   Text::Levenshtein::Flexible
+
+REPOSITORY
+    <https://github.com/ugexe/Text--Levenshtein--XS>
 
 BUGS
     Please report bugs to:
 
-    https://github.com/ugexe/Text--Levenshtein--XS/issues
+    <https://github.com/ugexe/Text--Levenshtein--XS/issues>
 
 AUTHOR
-    Nick Logan <ugexe@cpan.com>
+    ugexe <ugexe@cpan.org>
 
-LICENSE AND COPYRIGHT
-    This library is free software; you can redistribute it and/or modify it
-    under the same terms as Perl itself.
+COPYRIGHT AND LICENSE
+    This software is copyright (c) 2014 by Nick Logan.
+
+    This is free software; you can redistribute it and/or modify it under
+    the same terms as the Perl 5 programming language system itself.
 

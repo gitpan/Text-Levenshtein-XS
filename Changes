@@ -1,5 +1,8 @@
 Revision history for Perl module Text::Levenshtein::XS
 
+0.421-TRIAL Mon Oct 13 20:43:43 2014
+    - Dist::Zilla test
+
 0.42 Sun Oct 12 14:07:31 2014
     - CPAN release of 0.41_02 features/updates
 
